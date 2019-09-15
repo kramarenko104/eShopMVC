@@ -47,8 +47,8 @@ public class LoginController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    protected ModelAndView doPost(@RequestParam("login") String login,
-                                  @RequestParam("password") String pass,
+    protected ModelAndView doPost(@RequestParam("f_login") String login,
+                                  @RequestParam("f_password") String pass,
                                   ModelAndView modelAndView) {
         String viewToGo = "login";
         boolean showLoginForm = true;

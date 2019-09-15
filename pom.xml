@@ -78,8 +78,8 @@
 		<!--<version>2.1.5.RELEASE</version> -->
 		<!--</dependency> -->
 
-		<!--&lt;!&ndash; https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons-core 
-			&ndash;&gt; -->
+		<!--&lt;!&ndash; https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons-core
+		&ndash;&gt; -->
 		<!--<dependency> -->
 		<!--<groupId>org.springframework.data</groupId> -->
 		<!--<artifactId>spring-data-commons-core</artifactId> -->
@@ -130,7 +130,25 @@
 		<!--<version>1.1</version> -->
 		<!--</dependency> -->
 
-		<!--OTHER dependencies +++++++++++++++++++++++++++++++++++++++++ -->
+        <!--Spring security dependencies +++++++++++++++++++++++++++++++++++++++++ -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
+        <!--OTHER dependencies +++++++++++++++++++++++++++++++++++++++++ -->
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>

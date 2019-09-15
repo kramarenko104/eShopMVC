@@ -22,7 +22,7 @@
 
     <!-- 	application Loggers -->
     <logger name="log4j.logger.com.gmail.kramarenko104">
-        <level value="info"/>
+        <level value="debug"/>
     </logger>
 
     <!-- 3rdparty Loggers -->
@@ -47,12 +47,16 @@
     </logger>
 
     <logger name="org.springframework.web">
-        <level value="info"/>
+        <level value="debug"/>
+    </logger>
+
+    <logger name="org.springframework.security">
+        <level value="debug"/>
     </logger>
 
     <!-- Root Logger -->
     <root>
-        <priority value="info"/>
+        <priority value="debug"/>
         <appender-ref ref="stdout"/>
         <appender-ref ref="file"/>
     </root>

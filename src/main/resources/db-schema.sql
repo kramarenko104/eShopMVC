@@ -1,6 +1,19 @@
 CREATE DATABASE IF NOT EXISTS eshopdb CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE eshopdb;
 
+create table if not exists users
+(
+	userId bigint auto_increment primary key,
+	login varchar(100) not null,
+	password varchar(50) not null,
+	name varchar(50) not null,
+	address varchar(50) not null,
+	comment varchar(100) null,
+	role varchar(10) default 'ROLE_USER' not null,
+	constraint UK_ow0gan20590jrb00upg3va2fn
+		unique (login)
+);
+
 create table if not exists products
 (
 	productId bigint auto_increment
@@ -12,20 +25,6 @@ create table if not exists products
 	image varchar(100) null,
 	constraint UK_o61fmio5yukmmiqgnxf8pnavn
 		unique (name)
-);
-
-create table if not exists users
-(
-	userId bigint auto_increment
-		primary key,
-	login varchar(100) not null,
-	password varchar(50) not null,
-	name varchar(50) not null,
-	address varchar(50) not null,
-	comment varchar(100) null,
-	role varchar(10) default 'ROLE_USER' not null,
-	constraint UK_ow0gan20590jrb00upg3va2fn
-		unique (login)
 );
 
 create table if not exists carts
