@@ -6,37 +6,41 @@
         http://www.springframework.org/schema/security
         https://www.springframework.org/schema/security/spring-security.xsd">
 
-    <authentication-manager>
-        <authentication-provider user-service-ref="myUserDetailsService"/>
-    </authentication-manager>
-
-    <beans:bean id="myUserDetailsService"
-                class="com.gmail.kramarenko104.services.MyUserDetailsService"/>
-
-    <!--===========================================================-->
-    <http pattern="/login**" security="none"/>
-    <http pattern="/" security="none"/>
-    <http pattern="/product/**" security="none"/>
-    <http pattern="/static/**" security="none"/>
-
-    <!--<http/> creates FilterChainProxy-->
-    <http>
-        <intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/cart/*" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"/>
-        <intercept-url pattern="/order/*" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"/>
+    <http auto-config="true">
+        <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/forbidden" access="hasAnyRole('ROLE_ANONYMOUS', 'ROLE_USER')"/>
+        <intercept-url pattern="/cart" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"/>
+        <intercept-url pattern="/order" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"/>
+        <intercept-url pattern="/login" access="hasRole('ROLE_ANONYMOUS')"/>
+        <intercept-url pattern="/logout" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"/>
+        <intercept-url pattern="/product" access="hasAnyRole('ROLE_ANONYMOUS', 'ROLE_ADMIN', 'ROLE_USER')"/>
+        <intercept-url pattern="/static" access="hasAnyRole('ROLE_ANONYMOUS', 'ROLE_ADMIN', 'ROLE_USER')"/>
+        <intercept-url pattern="/" access="hasAnyRole('ROLE_ANONYMOUS', 'ROLE_ADMIN', 'ROLE_USER')"/>
 
         <access-denied-handler error-page="/forbidden"/>
 
         <!--<form-login/> creates UserPasswordAuthenticationFilter-->
-        <form-login login-page="/login.jsp"
+        <form-login login-page="/login"
                     authentication-failure-url="/login?error"
-                    authentication-success-forward-url="/product"
                     username-parameter="f_login"
                     password-parameter="f_password"
                     default-target-url="/product"
                     always-use-default-target="true"
         />
-        <logout logout-url='/logout'/>
+        <logout logout-success-url="/login?logout"/>
     </http>
 
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="userDetailsServiceImpl">
+            <password-encoder ref="encoder"></password-encoder>
+        </authentication-provider>
+    </authentication-manager>
+
+    <beans:bean id="userDetailsServiceImpl"
+                class="com.gmail.kramarenko104.services.UserDetailsServiceImpl"/>
+
+    <beans:bean id="encoder"
+                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <beans:constructor-arg name="strength" value="11"/>
+    </beans:bean>
 </beans:beans>

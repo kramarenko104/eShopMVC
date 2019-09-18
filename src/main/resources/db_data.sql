@@ -1,8 +1,16 @@
 USE eshopdb;
-INSERT INTO users (userId, login, password, name, address, comment, role) VALUES (1, 'admin', '1e8949373cf0dc044b49c9dd3ddd1835', 'Alex', 'Kiev', '-', 'ROLE_ADMIN');
-INSERT INTO users (userId, login, password, name, address, comment, role) VALUES (2, 'alex@gmail.com', '-5039f9f6cecff39cf359c1de1fbc2b7f', 'Alexander', 'Kiev', 'call before delivery', 'ROLE_USER');
-INSERT INTO users (userId, login, password, name, address, comment, role) VALUES (3, 'julia@gmail.com', '53df562cd13c57455c2c1bbe1854458f', 'julia', 'Kiev', 'd''ont call', 'ROLE_USER');
-INSERT INTO users (userId, login, password, name, address, comment, role) VALUES (4, 'mash198@ukr.net', '53df562cd13c57455c2c1bbe1854458f', 'Maria', 'Lviv', 'd''ont call', 'ROLE_USER');
+INSERT INTO users (userId, login, password, name, address, comment) VALUES (1, 'admin', '1e8949373cf0dc044b49c9dd3ddd1835', 'Alex', 'Kiev', '-');
+INSERT INTO users (userId, login, password, name, address, comment) VALUES (2, 'alex@gmail.com', '-5039f9f6cecff39cf359c1de1fbc2b7f', 'Alexander', 'Kiev', 'call before delivery');
+INSERT INTO users (userId, login, password, name, address, comment) VALUES (3, 'julia@gmail.com', '53df562cd13c57455c2c1bbe1854458f', 'julia', 'Kiev', 'd''ont call');
+INSERT INTO users (userId, login, password, name, address, comment) VALUES (4, 'mash198@ukr.net', '53df562cd13c57455c2c1bbe1854458f', 'Maria', 'Lviv', 'd''ont call');
+
+INSERT INTO roles (roleId, name) VALUES (1, 'ROLE_ADMIN');
+INSERT INTO roles (roleId, name) VALUES (2, 'ROLE_USER');
+
+INSERT INTO user_roles (userId, roleId) VALUES (1, 1);
+INSERT INTO user_roles (userId, roleId) VALUES (2, 2);
+INSERT INTO user_roles (userId, roleId) VALUES (3, 2);
+INSERT INTO user_roles (userId, roleId) VALUES (4, 2);
 
 INSERT INTO products (productId, name, category, price, description, image) VALUES (1, 'Nora Naviano Imressive dusty blue', 1, 3450, 'Blue evening dress with an embroidered bodice and a narrow belt. Model of 2019 year. Main material: atlas. Light shine of a fabric and  the romantic muffled shade of blue will submit the most dreamy girls.', 'dusty-blue-400x650_3400.jpg');
 INSERT INTO products (productId, name, category, price, description, image) VALUES (2, 'Very berry marsala', 1, 1654, 'Very berry. Long satin dress with a guipure top, a high waistline and a boat neckline. Color: Marsala.', 'evening_dress_f1_2300.jpg');

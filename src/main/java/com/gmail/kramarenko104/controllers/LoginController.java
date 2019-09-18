@@ -3,6 +3,7 @@ package com.gmail.kramarenko104.controllers;
 import com.gmail.kramarenko104.model.Cart;
 import com.gmail.kramarenko104.model.User;
 import com.gmail.kramarenko104.services.CartService;
+import com.gmail.kramarenko104.services.SecurityService;
 import com.gmail.kramarenko104.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,15 +27,18 @@ public class LoginController {
 
     private UserService userService;
     private CartService cartService;
+    private SecurityService securityService;
 
     @PersistenceContext
     private EntityManager em;
 
     @Autowired
     public LoginController(UserService userService,
-                           CartService cartService) {
+                           CartService cartService,
+                           SecurityService securityService) {
         this.userService = userService;
         this.cartService = cartService;
+        this.securityService = securityService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -42,7 +46,7 @@ public class LoginController {
         modelAndView.setViewName("login");
         modelAndView.addObject("message", null);
         modelAndView.addObject("showLoginForm", true);
-        logger.debug("[eshop] LoginController.doGet:   enter ....goto login.jsp......");
+        logger.debug("[eshop] LoginController.doGet....goto login.jsp");
         return modelAndView;
     }
 
@@ -71,7 +75,7 @@ public class LoginController {
                         modelAndView.addObject("user", currentUser);
                         logger.debug("[eshop] LoginController.doPost: User " + currentUser.getName() + " was registered and passed autorization");
 
-                        if ("ROLE_ADMIN".equals(currentUser.getRole())) {
+                        if (currentUser.getRoles().contains("ROLE_ADMIN")) {
                             isAdmin = true;
                         }
                         // for authorized user get the corresponding shopping Cart
@@ -84,6 +88,8 @@ public class LoginController {
                         }
                         viewToGo = "product";
                         modelAndView.addObject("cart", userCart);
+
+                        securityService.autoLogin(login, pass);
                     } else {
                         msgText.append("<b><font size=3 color='red'>Wrong password, try again!</font>");
                     }
