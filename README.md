@@ -5,7 +5,7 @@ Were used:
 - Spring transactions
 - Hibernate 5.4.2
 - JPA 2.2, JPQL
-- AOP: aspectjweaver 1.9.4
+- Spring AOP, aspectjweaver 1.9.4
 - Servlet API 3.1.0
 - JSP 2.2, JSTL 1.2
 - MySQL Server 5.7.23 
