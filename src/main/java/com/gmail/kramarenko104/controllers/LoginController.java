@@ -75,7 +75,10 @@ public class LoginController {
                         modelAndView.addObject("user", currentUser);
                         logger.debug("[eshop] LoginController.doPost: User " + currentUser.getName() + " was registered and passed autorization");
 
-                        if (currentUser.getRoles().contains("ROLE_ADMIN")) {
+                        if (currentUser.getRoles().stream()
+                                .map(Role::toString)
+                                .collect(Collectors.joining( "," ))
+                                .contains("ROLE_ADMIN")) {
                             isAdmin = true;
                         }
                         // for authorized user get the corresponding shopping Cart
