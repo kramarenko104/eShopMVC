@@ -6,11 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.Email;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -29,4 +27,9 @@ public class Role implements Serializable {
     @Column(unique = true, nullable = false)
     @NotNull
     private String name;
+    
+    @Override
+    public String toString() {
+        return name;
+    }
 }
